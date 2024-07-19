@@ -62,7 +62,7 @@ class AddSimpleProduct implements DataPatchInterface
             ]
         );
         $product->setWebsiteIds([$this->storeManager->getStore()->getWebsiteId()]);
-        $product->setCategoryIds([3]); // Replace with your desired category ID
+        $product->setCategoryIds([3]); // 3 for Men
 
         // Save the product
         $this->productRepository->save($product);
