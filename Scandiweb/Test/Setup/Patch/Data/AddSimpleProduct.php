@@ -76,13 +76,13 @@ class AddSimpleProduct implements DataPatchInterface
     {
         $sku = 'oversize-tshirt-sku';
         $product = $this->productInterfaceFactory->create();
+
         if($product->getIdBySku($sku)){
             return;
         }
 
         // Product does not exist, create a new one
         $product->setSku($sku);
-
 
         // Set or update product attributes
         $product->setName('Oversize T-Shirt');
@@ -103,7 +103,6 @@ class AddSimpleProduct implements DataPatchInterface
         $product->setWebsiteIds([$this->storeManager->getStore()->getWebsiteId()]);
         $product->setCategoryIds([3]); // 3 for Men
         $product->setQuantity(100);
-
 
         // Save the product
         $this->productRepository->save($product);
