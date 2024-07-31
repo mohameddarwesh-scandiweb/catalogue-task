@@ -130,6 +130,14 @@ class AddSimpleProduct implements DataPatchInterface
         $this->setSourceItemQuantity($sku, 'default', 100);
     }
 
+    /**
+     * Set the quantity of the source item
+     *
+     * @return void
+     * @param string $sku
+     * @param string $sourceCode
+     * @param float $quantity
+     */
     private function setSourceItemQuantity(string $sku, string $sourceCode, float $quantity): void
     {
 
