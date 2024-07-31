@@ -80,7 +80,7 @@ class AddSimpleProduct implements DataPatchInterface
 
         // Product does not exist, create a new one
         $product->setSku($sku);
-    
+
 
         // Set or update product attributes
         $product->setName('Oversize T-Shirt');
