@@ -29,6 +29,7 @@ class AddSimpleProduct implements DataPatchInterface
     protected State $state;
 
     /**
+     * AddSimpleProduct constructor.
      * @param ProductInterfaceFactory $productFactory
      * @param ProductRepositoryInterface $productRepository
      * @param StoreManagerInterface $storeManager
@@ -47,12 +48,10 @@ class AddSimpleProduct implements DataPatchInterface
         $this->state = $state;
     }
 
+
     /**
+     * Applies the patch
      * @return void
-     * @throws NoSuchEntityException
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
-     * @throws \Magento\Framework\Exception\InputException
-     * @throws \Magento\Framework\Exception\StateException
      * @throws \Exception
      */
     public function apply(): void
@@ -60,6 +59,14 @@ class AddSimpleProduct implements DataPatchInterface
         $this->state->emulateAreaCode('adminhtml', [$this, 'execute']);
     }
 
+    /**
+     * Execute the patch
+     * @return void
+     * @throws NoSuchEntityException
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Exception\StateException
+     */
     public function execute(): void
     {
         $sku = 'oversize-tshirt-sku';
@@ -92,11 +99,13 @@ class AddSimpleProduct implements DataPatchInterface
         $product->setCategoryIds([3]); // 3 for Men
         $product->setQuantity(100);
 
+
         // Save the product
         $this->productRepository->save($product);
     }
 
     /**
+     * Get the array of patches that have to be executed before this patch
      * @return array|string[]
      */
     public static function getDependencies(): array
@@ -105,6 +114,7 @@ class AddSimpleProduct implements DataPatchInterface
     }
 
     /**
+     * Get the array of patches that have to be executed after this patch
      * @return array|string[]
      */
     public function getAliases(): array
