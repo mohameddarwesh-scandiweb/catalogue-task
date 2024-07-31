@@ -18,14 +18,17 @@ class AddSimpleProduct implements DataPatchInterface
      * @var ProductInterfaceFactory
      */
     protected ProductInterfaceFactory $productInterfaceFactory;
+
     /**
      * @var ProductRepositoryInterface
      */
     protected ProductRepositoryInterface $productRepository;
+
     /**
      * @var StoreManagerInterface
      */
     protected StoreManagerInterface $storeManager;
+
     /**
      * @var State
      */
@@ -50,7 +53,6 @@ class AddSimpleProduct implements DataPatchInterface
         $this->storeManager = $storeManager;
         $this->state = $state;
     }
-
 
     /**
      * Applies the patch
