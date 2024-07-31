@@ -70,14 +70,14 @@ class AddSimpleProduct implements DataPatchInterface
     public function execute(): void
     {
         $sku = 'oversize-tshirt-sku';
-        try {
-            $product = $this->productInterfaceFactory->getIdBySku($sku);
-
-        } catch (NoSuchEntityException $e) {
-            // Product does not exist, create a new one
-            $product = $this->productInterfaceFactory->create();
-            $product->setSku($sku);
+        $product = $this->productInterfaceFactory->create();
+        if($product->getIdBySku($sku)){
+            return;
         }
+
+        // Product does not exist, create a new one
+        $product->setSku($sku);
+    
 
         // Set or update product attributes
         $product->setName('Oversize T-Shirt');
