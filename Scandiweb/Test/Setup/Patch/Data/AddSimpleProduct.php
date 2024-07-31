@@ -14,7 +14,7 @@ class AddSimpleProduct implements DataPatchInterface
     /**
      * @var ProductInterfaceFactory
      */
-    protected ProductInterfaceFactory $productFactory;
+    protected ProductInterfaceFactory $productInterfaceFactory;
     /**
      * @var ProductRepositoryInterface
      */
@@ -41,7 +41,7 @@ class AddSimpleProduct implements DataPatchInterface
         State $state
     )
     {
-        $this->productFactory = $productFactory;
+        $this->productInterfaceFactory = $productFactory;
         $this->productRepository = $productRepository;
         $this->storeManager = $storeManager;
         $this->state = $state;
@@ -64,11 +64,11 @@ class AddSimpleProduct implements DataPatchInterface
     {
         $sku = 'oversize-tshirt-sku';
         try {
-            // Try to load the product by SKU
-            $product = $this->productRepository->get($sku);
+            $product = $this->productInterfaceFactory->getIdBySku($sku);
+
         } catch (NoSuchEntityException $e) {
             // Product does not exist, create a new one
-            $product = $this->productFactory->create();
+            $product = $this->productInterfaceFactory->create();
             $product->setSku($sku);
         }
 
