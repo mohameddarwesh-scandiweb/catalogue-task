@@ -53,15 +53,15 @@ class AddSimpleProduct implements DataPatchInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\InputException
      * @throws \Magento\Framework\Exception\StateException
+     * @throws \Exception
      */
     public function apply(): void
     {
-        try {
-            $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
-        } catch (\Magento\Framework\Exception\LocalizedException $e) {
-            // Area code is already set
-        }
+        $this->state->emulateAreaCode('adminhtml', [$this, 'execute']);
+    }
 
+    public function execute(): void
+    {
         $sku = 'oversize-tshirt-sku';
         try {
             // Try to load the product by SKU
