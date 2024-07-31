@@ -1,4 +1,5 @@
 <?php
+
 namespace Scandiweb\Test\Setup\Patch\Data;
 
 use Magento\Framework\Setup\Patch\DataPatchInterface;
@@ -10,24 +11,50 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class AddSimpleProduct implements DataPatchInterface
 {
-    private $productFactory;
-    private $productRepository;
-    private $storeManager;
-    private $state;
+    /**
+     * @var ProductInterfaceFactory
+     */
+    protected ProductInterfaceFactory $productFactory;
+    /**
+     * @var ProductRepositoryInterface
+     */
+    protected ProductRepositoryInterface $productRepository;
+    /**
+     * @var StoreManagerInterface
+     */
+    protected StoreManagerInterface $storeManager;
+    /**
+     * @var State
+     */
+    protected State $state;
 
+    /**
+     * @param ProductInterfaceFactory $productFactory
+     * @param ProductRepositoryInterface $productRepository
+     * @param StoreManagerInterface $storeManager
+     * @param State $state
+     */
     public function __construct(
         ProductInterfaceFactory $productFactory,
         ProductRepositoryInterface $productRepository,
         StoreManagerInterface $storeManager,
         State $state
-    ) {
+    )
+    {
         $this->productFactory = $productFactory;
         $this->productRepository = $productRepository;
         $this->storeManager = $storeManager;
         $this->state = $state;
     }
 
-    public function apply()
+    /**
+     * @return void
+     * @throws NoSuchEntityException
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Exception\StateException
+     */
+    public function apply(): void
     {
         try {
             $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
@@ -68,12 +95,18 @@ class AddSimpleProduct implements DataPatchInterface
         $this->productRepository->save($product);
     }
 
-    public static function getDependencies()
+    /**
+     * @return array|string[]
+     */
+    public static function getDependencies(): array
     {
         return [];
     }
 
-    public function getAliases()
+    /**
+     * @return array|string[]
+     */
+    public function getAliases(): array
     {
         return [];
     }
