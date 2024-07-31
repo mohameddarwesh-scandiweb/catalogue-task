@@ -8,6 +8,9 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\State;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\InputException;
+use Magento\Framework\Exception\StateException;
 
 class AddSimpleProduct implements DataPatchInterface
 {
@@ -63,9 +66,9 @@ class AddSimpleProduct implements DataPatchInterface
      * Execute the patch
      * @return void
      * @throws NoSuchEntityException
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
-     * @throws \Magento\Framework\Exception\InputException
-     * @throws \Magento\Framework\Exception\StateException
+     * @throws CouldNotSaveException
+     * @throws InputException
+     * @throws StateException
      */
     public function execute(): void
     {
